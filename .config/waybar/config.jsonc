@@ -1,0 +1,117 @@
+{
+    "height": 20,
+    "layer": "top",
+    "position": "top",
+    "modules-left": ["hyprland/workspaces","hyprland/window", "hyprland/submap"],
+    "modules-center": ["clock"],
+    "modules-right": ["network", "bluetooth","pulseaudio","cpu", "memory","battery"],
+    "hyprland/window": { 
+        "max-length": 50
+    },
+    "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-muted": "",
+    "format-icons": {
+      "default": ["", "", " "]
+    },
+    "on-click": "pavucontrol"
+  },
+    "bluetooth": {
+      "format": "",
+      "format-disabled": "", // an empty format will hide the module
+      "format-connected": " {num_connections}",
+      "tooltip-format": "{controller_alias}\t{controller_address}",
+      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+      "on-click": "exec kitty --title=bluetui -e bluetui"
+    },
+    "cpu": {
+        "interval": 10,
+        "format": " {}%",
+        "max-length": 10,
+        "on-click": "exec kitty --title=btop -e btop"
+    },
+    "memory": {
+        "interval": 30,
+        "format": " {percentage}%",
+        "tooltip-format": "{used:0.1f}G/{total:0.1f}G used",
+        "on-click": "exec kitty --title=htop -e htop"
+    },
+    "network": {
+        "format": "",
+        "format-wifi": "",
+        "format-ethernet": "",
+        "format-disconnected": "󰤭", //An empty format will hide the module.
+        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "󰖪",
+        "max-length": 50,
+        "on-click": "exec nmrs"
+      },
+    "battery": {
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+  "clock": {
+      "format": "󰥔 {:%a, %d. %b %I:%M %p}",
+      "tooltip-format": "<tt><small>{calendar}</small></tt>",
+      "calendar": {
+        "format": {
+          "today": "<span color='#75f1fa'><b>{}</b></span>"
+        }
+      },
+  "custom/day": {
+    "exec": "date +'%a'",
+    "interval": 60,
+    "on-click": "gtk-launch WebApp-Reminders0631",
+    "tooltip-format": "Today's To Do"
+  },
+  "custom/date": {
+    "exec": "date +'%-m/%-d'",
+    "interval": 60,
+    "on-click": "hyprctl eval 'hl.dispatch(hl.dsp.workspace.toggle_special(\"calendar\"))'",
+    "on-click-right": "hyprctl eval 'hl.exec_cmd(\"gnome-calendar\")'", // Back up to restart the calendar if needed
+    "tooltip-format": "Click to open calendar"
+  },
+  "custom/wallpaper": {
+    "exec": "~/.config/hypr/scripts/wallpaper_icon.sh",
+    "on-click": "~/.config/hypr/scripts/toggle_wallpaper.sh",
+  "interval": 1
+  },
+  "custom/power": {
+	"format" : "⏻",
+	"tooltip-format": "Power Menu",
+  "on-click": "eww active-windows | grep powermenu  && eww close powermenu  || eww open powermenu"
+  },
+  "custom/tuipom": {
+	"format" : "󰀠",
+	"tooltip-format": "Pomodoro Timer",
+  "on-click": "hyprctl eval 'hl.dispatch(hl.dsp.workspace.toggle_special(\"pomodoro\"))'",
+  "on-click-right": "ghostty +new-window --title=pomodoro -e ~/.cargo/bin/timr-tui -m pomodoro"
+  },
+  "custom/colorpicker": {
+	"format" : "󱏜",
+	"tooltip-format": "Pick Color",
+  "on-click": "hyprpicker -a -n"
+  },
+  "custom/newnote": {
+	"format" : "󱞂",
+	"tooltip-format": "New Obsidian Note",
+  "on-click": "hyprctl clients | grep newnote  && hyprctl eval 'hl.dispatch(hl.dsp.workspace.toggle_special(\"newnote\"))'  || ghostty +new-window --title=newnote -e ~/.config/hypr/scripts/newnote.sh"
+  },
+  "network#vpn": {
+    "interface": "wg0-mullvad",
+    "format": "",
+    "format-disconnected": "",
+    "tooltip": false,
+    "on-click": "mullvad status | grep Connected && mullvad disconnect || mullvad connect",
+    "on-click-right": "/opt/Mullvad\\ VPN/mullvad-vpn & disown"
+  }
+}
+}
+
+
+
+"on-sigusr1": "hide",
+"on-sigusr2": "show",

@@ -1,0 +1,27 @@
+# Ignore Discord Cache and Data
+.config/discord/Code Cache/
+.config/discord/Local Storage/
+.config/discord/GPUCache/
+.config/discord/logs/
+.config/discord/WebStorage/
+.config/discord/Shared Dictionary/
+
+# Ignore general system junk
+.steam/
+.cache/
+.local/
+.Trash/
+*.log
+*.dmp
+*.bak
+.build
+discord 
+
+# Ignore Secret Files (IMPORTANT!)
+.ssh/
+.gnupg/
+.aws/
+.env
+.git-credentials
+*passwords*
+

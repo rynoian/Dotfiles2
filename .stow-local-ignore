@@ -1,0 +1,34 @@
+# In ~/dotfiles/.stow-local-ignore
+# Ignore ALL files except explicit config files
+
+# Ignore entire directories
+.*/cache2/.*
+.*/storage/.*
+.*/safebrowsing/.*
+.*/datareporting/.*
+.*/sessionstore-backups/.*
+.*/thumbnails/.*
+.*/startupCache/.*
+
+# Ignore specific files
+.*\.sqlite$
+.*\.sqlite-wal$
+.*\.sqlite-shm$
+.*\.lock$
+.*\.json$
+xulstore\.json
+parent\.lock
+places\.sqlite
+cookies\.sqlite
+permissions\.sqlite
+favicons\.sqlite
+formhistory\.sqlite
+logins\.json
+cert9\.db
+key4\.db
+.git
+# Only allow specific files to be stowed
+# (This is a whitelist approach)
+# user\.js
+# prefs\.js
+# chrome/.*
